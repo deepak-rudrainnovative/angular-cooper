@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy:gh": "ng build --prod --base-href='https://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@github.com/deepak-rudrainnovative/angular-cooper/' && sudo ngh"
   },
   "private": true,
   "dependencies": {
