@@ -1,0 +1,48 @@
+
+<div class="col-6 mx-auto mt-5 border p-5">
+  
+    <form *ngIf="!organizationCreate" [formGroup]="selectOrganizationForm" (ngSubmit)="selectOrganization()">
+        <h4 class="mb-4 mt-5">Select Organization</h4>
+        <select formControlName="organizationId" class="form-select mb-2" aria-label="Default select example" [style]="selectOrganizationForm.controls?.['organizationId']?.touched && selectOrganizationForm.controls?.['organizationId']?.errors?.['required'] ? 'border-color:red':''">
+           <option selected value="">Select Organization</option>
+           <option *ngFor="let organization of organizations" [value]="organization._id">{{organization.organizationName}}</option>
+        
+        </select>
+        <p class="mb-3" class="text-danger">
+        <small *ngIf="selectOrganizationForm.controls?.['organizationId']?.touched && selectOrganizationForm.controls?.['organizationId']?.errors?.['required']">Organization is Required</small></p>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button class="btn btn-default text-primary mx-2" (click)="organizationCreate=!organizationCreate" ><u>Create Organization</u></button>
+    </form>
+
+    <form *ngIf="organizationCreate" [formGroup]="organizationForm" (ngSubmit)="createOrganization()">
+        <h4 class="mb-4 mt-5">Create Organization</h4>
+        <p *ngIf="message" class="text-capitalize text-danger">{{message}}</p>
+        <div class="mb-3">
+          <label for="organizationName" class="form-label">Organization Name <sup class="text-danger">*</sup></label>
+          <input type="text" class="form-control" formControlName="organizationName" id="organizationName" aria-describedby="emailHelp">
+          
+          <small class="text-danger" *ngIf="organizationControl?.['organizationName']?.touched && organizationControl?.['organizationName']?.errors?.['required']">Organization Name is Required</small>
+      
+        </div>
+        <div class="mb-3">
+          <label for="organizationType" class="form-label">Organization Type <sup class="text-danger">*</sup></label>
+          <input type="text" class="form-control" formControlName="organizationType" id="organizationType" aria-describedby="emailHelp">
+          
+          <small class="text-danger" *ngIf="organizationControl?.['organizationType']?.touched && organizationControl?.['organizationType']?.errors?.['required']">Organization Type is Required</small>
+      
+        </div>
+        <div class="mb-4">
+          <div  class="form-label d-flex justify-content-between mb-2">
+                <label for="organizationUrl">Organization Url <sup class="text-danger">*</sup></label>
+          </div>
+
+          <input type="url" required="true" formControlName="organizationUrl" class="form-control" id="organizationUrl">
+         <small class="text-danger" *ngIf="organizationControl?.['organizationUrl']?.touched && organizationControl?.['organizationUrl']?.errors?.['required']">Organization Url is Required</small>
+          
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button class="btn btn-secondary mx-1" (click)="organizationCreate=!organizationCreate" >Select Organization</button>
+    </form>
+    <div class="mt-1 text-end"><button class="btn btn-dark btn-sm" (click)="handleLogout()">Logout</button></div>
+</div>

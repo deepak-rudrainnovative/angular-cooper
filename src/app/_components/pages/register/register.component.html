@@ -1,0 +1,29 @@
+<div class="col-6 mx-auto mt-5 border p-5">
+  <h3 class="text-center mb-3">Register Form</h3>
+    <form [formGroup]="registerForm" (ngSubmit)="handleRegister()">
+
+        <p *ngIf="message" class="text-capitalize text-danger">{{message}}</p>
+        <div class="mb-3">
+            <label for="fullName" class="form-label">FullName <sup class="text-danger">*</sup></label>
+            <input type="text" formControlName="fullName" class="form-control" id="fullName" aria-describedby="nameHelp">
+            <small class="text-danger" *ngIf="formControl?.['fullName']?.touched && formControl?.['fullName']?.errors?.['required']">FullName is Required</small>
+          </div>
+        <div class="mb-3">
+          <label for="emailAddress" class="form-label">Email address <sup class="text-danger">*</sup></label>
+          <input type="email" formControlName="email" class="form-control" id="emailAddress" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <small class="text-danger" *ngIf="formControl?.['email']?.touched && formControl?.['email']?.errors?.['required']">Email is Required</small>
+          <small class="text-danger" *ngIf="formControl?.['email']?.touched && formControl?.['email']?.errors?.['pattern']">Email is Invalid</small>
+        </div>
+        <div class="mb-5">
+          <label for="passwordField" class="form-label">Password <sup class="text-danger">*</sup></label>
+          <input type="password" formControlName="password" class="form-control" id="passwordField">
+          <small class="text-danger" *ngIf="formControl?.['password']?.touched && formControl?.['password']?.errors?.['required']">Password is Required</small>
+          <small class="text-danger" *ngIf="formControl?.['password']?.touched && formControl?.['password']?.errors?.['minlength']">Minimum Length is {{formControl?.['password']?.errors?.['minlength'].requiredLength}}</small>
+          <small class="text-danger" *ngIf="formControl?.['password']?.touched && !formControl?.['password']?.errors?.['minlength'] && formControl?.['password']?.errors?.['pattern']">Password is Invalid Ex : Abc@123</small>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Register</button>
+        <button class="btn btn-secondary mx-1" routerLink="/login" [queryParams]="{page:'login'}">Login</button>
+      </form>
+</div>
